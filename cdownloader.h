@@ -1,10 +1,10 @@
 /********************************************************************
 *
-*   File: cmainwindow.cpp    Class: CMainWindow
+*   File: cdownloader.h    Class: %CLASSNAME%
 *
 *   This file is part of the MEGA-Series Project.
 *   Copyright (C) 2016 Joerg Pauly
-*   Created 06.01.2016 by joerg
+*   Created 10.01.2016 by joerg
 *   All Rights reserved
 *
 *   Alle Programme der MEGA-Serie sind Freie Software:
@@ -25,22 +25,39 @@
 *   Wenn nicht, siehe <http://www.gnu.org/licenses/>.
 *
 ********************************************************************/
-#include "cmainwindow.h"
-#include "ui_cmainwindow.h"
+#ifndef CDOWNLOADER_H
+#define CDOWNLOADER_H
 
-CMainWindow::CMainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::CMainWindow)
+// System-Header
+#include <QObject>
+#include <QString>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QFile>
+#include <QIODevice>
+
+
+class CDownloader : public QObject
 {
-    ui->setupUi(this);
-}
+    Q_OBJECT
 
-CMainWindow::~CMainWindow()
-{
-    delete ui;
-}
+private:
+    QObject*            m_parent;
+    QFile*              m_TsFile;
+    QFile*              m_DbFile;
+    QNetworkRequest*    m_Request;
+    QNetworkReply*      m_Reply;
 
-void CMainWindow::on_actionAktualisieren_triggered()
-{
+public:
+    explicit CDownloader(QObject *parent = 0);
+    ~CDownloader();
 
-}
+    void doDownload();
+
+signals:
+
+public slots:
+};
+
+#endif // CDOWNLOADER_H

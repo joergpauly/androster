@@ -13,9 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        cmainwindow.cpp
+        cmainwindow.cpp \
+    cdownloader.cpp
 
-HEADERS  += cmainwindow.h
+HEADERS  += cmainwindow.h \
+    cdownloader.h
 
 FORMS    += cmainwindow.ui
 

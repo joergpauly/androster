@@ -27,13 +27,31 @@
     <property name="title">
      <string>Einstellungen</string>
     </property>
-    <addaction name="actionDownload_Intervall"/>
+    <addaction name="actionAktualisieren"/>
+    <addaction name="actionTag"/>
+    <addaction name="actionWoche"/>
+    <addaction name="actionMonat"/>
    </widget>
    <addaction name="menuEinstellungen"/>
   </widget>
-  <action name="actionDownload_Intervall">
+  <action name="actionAktualisieren">
    <property name="text">
-    <string>Download-Intervall</string>
+    <string>Aktualisieren</string>
+   </property>
+  </action>
+  <action name="actionTag">
+   <property name="text">
+    <string>Tag</string>
+   </property>
+  </action>
+  <action name="actionWoche">
+   <property name="text">
+    <string>Woche</string>
+   </property>
+  </action>
+  <action name="actionMonat">
+   <property name="text">
+    <string>Monat</string>
    </property>
   </action>
  </widget>

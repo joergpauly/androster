@@ -28,7 +28,11 @@
 #ifndef CMAINWINDOW_H
 #define CMAINWINDOW_H
 
+// System-Header
 #include <QMainWindow>
+
+// Projekt-Header
+#include "cdownloader.h"
 
 namespace Ui {
 class CMainWindow;
@@ -38,9 +42,15 @@ class CMainWindow : public QMainWindow
 {
     Q_OBJECT
 
+private:
+    CDownloader*    m_Dl;
+
 public:
     explicit CMainWindow(QWidget *parent = 0);
     ~CMainWindow();
+
+private slots:
+    void on_actionAktualisieren_triggered();
 
 private:
     Ui::CMainWindow *ui;
