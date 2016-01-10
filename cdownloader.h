@@ -34,8 +34,15 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QUrl>
 #include <QFile>
 #include <QIODevice>
+
+
+// Makros
+#define FTPURL   "ftp://ftp.it-kramer.eu/mmv/brd/"
+#define USERNAME "u40207960"
+#define PASSWD   "P3rsephone"
 
 
 class CDownloader : public QObject

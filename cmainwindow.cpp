@@ -42,5 +42,7 @@ CMainWindow::~CMainWindow()
 
 void CMainWindow::on_actionAktualisieren_triggered()
 {
-
+    m_Dl = new CDownloader(this);
+    m_Dl->doDownload();
+    m_Dl->deleteLater();
 }
