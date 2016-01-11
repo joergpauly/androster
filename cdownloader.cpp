@@ -41,3 +41,12 @@ void CDownloader::doDownload()
 {
 
 }
+
+bool CDownloader::checkDb()
+{
+    QString lFName(qApp->applicationDirPath());
+    lFName.append("/");
+    lFName.append(DBFILE);
+    QFile lFile(lFName);
+    return lFile.open(QIODevice::ReadOnly);
+}

@@ -29,6 +29,7 @@
 #define CDOWNLOADER_H
 
 // System-Header
+#include <QApplication>
 #include <QObject>
 #include <QString>
 #include <QNetworkAccessManager>
@@ -43,6 +44,8 @@
 #define FTPURL   "ftp://ftp.it-kramer.eu/mmv/brd/"
 #define USERNAME "u40207960"
 #define PASSWD   "P3rsephone"
+#define DBFILE   "mr.sqlite"
+#define TSFILE   "dbts.ver"
 
 
 class CDownloader : public QObject
@@ -61,6 +64,7 @@ public:
     ~CDownloader();
 
     void doDownload();
+    bool checkDb();
 
 signals:
 

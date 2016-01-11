@@ -57,7 +57,7 @@ private slots:
 private:
     Ui::CMainWindow *ui;
 
-    bool checkDb();
+
 };
 
 #endif // CMAINWINDOW_H

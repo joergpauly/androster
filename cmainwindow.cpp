@@ -33,7 +33,9 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui(new Ui::CMainWindow)
 {
     ui->setupUi(this);
-    if(!checkDb())
+    m_Dl = new CDownloader(this);
+
+    if(!m_Dl->checkDb())
     {
         on_actionAktualisieren_triggered();
     }
@@ -51,10 +53,4 @@ void CMainWindow::on_actionAktualisieren_triggered()
     m_Dl->deleteLater();
 }
 
-bool CMainWindow::checkDb()
-{
-    QString lFName(QApplication::applicationDirPath());
-    lFName.append("/mr.sqlite");
-    QFile lFile(lFName);
-    return lFile.open(QIODevice::ReadOnly);
-}
+
