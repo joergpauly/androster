@@ -30,6 +30,8 @@
 
 // System-Header
 #include <QMainWindow>
+#include <QFile>
+#include <QString>
 
 // Projekt-Header
 #include "cdownloader.h"
@@ -54,6 +56,8 @@ private slots:
 
 private:
     Ui::CMainWindow *ui;
+
+    bool checkDb();
 };
 
 #endif // CMAINWINDOW_H
