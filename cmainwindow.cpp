@@ -33,24 +33,25 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui(new Ui::CMainWindow)
 {
     ui->setupUi(this);
+    m_Db = new CDatabaseManager(this);
     m_Dl = new CDownloader(this);
 
     if(!m_Dl->checkDb())
     {
-        on_actionAktualisieren_triggered();
+        m_Dl->doDownload(true);
     }
 }
 
 CMainWindow::~CMainWindow()
 {
     delete ui;
+    m_Db->deleteLater();
+    m_Dl->deleteLater();
 }
 
 void CMainWindow::on_actionAktualisieren_triggered()
 {
-    m_Dl = new CDownloader(this);
-    m_Dl->doDownload();
-    m_Dl->deleteLater();
+    m_Dl->doDownload(false);
 }
 
 

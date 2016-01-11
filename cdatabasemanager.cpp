@@ -1,6 +1,6 @@
 /********************************************************************
 *
-*   File: cdatabasemanager.cpp    Class: %CLASSNAME%
+*   File: cdatabasemanager.cpp    Class: CDatabaseManager
 *
 *   This file is part of the MEGA-Series Project.
 *   Copyright (C) 2016 Joerg Pauly

@@ -35,6 +35,7 @@
 
 // Projekt-Header
 #include "cdownloader.h"
+#include "cdatabasemanager.h"
 
 namespace Ui {
 class CMainWindow;
@@ -45,7 +46,8 @@ class CMainWindow : public QMainWindow
     Q_OBJECT
 
 private:
-    CDownloader*    m_Dl;
+    CDownloader*        m_Dl;
+    CDatabaseManager*   m_Db;
 
 public:
     explicit CMainWindow(QWidget *parent = 0);

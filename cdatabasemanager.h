@@ -1,6 +1,6 @@
 /********************************************************************
 *
-*   File: cdatabasemanager.h    Class: %CLASSNAME%
+*   File: cdatabasemanager.h    Class: CDatabaseManager
 *
 *   This file is part of the MEGA-Series Project.
 *   Copyright (C) 2016 Joerg Pauly

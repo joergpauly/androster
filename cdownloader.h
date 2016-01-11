@@ -59,11 +59,21 @@ private:
     QNetworkRequest*    m_Request;
     QNetworkReply*      m_Reply;
 
+    enum Retrieve
+    {
+        timeStamp,
+        dataBase
+    };
+
+    bool getTimeStamp();
+    bool getDataBase();
+    void checkForUpdate();
+
 public:
     explicit CDownloader(QObject *parent = 0);
     ~CDownloader();
 
-    void doDownload();
+    void doDownload(bool pSetup);
     bool checkDb();
 
 signals:
