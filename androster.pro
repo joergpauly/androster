@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         cmainwindow.cpp \
-    cdownloader.cpp
+    cdownloader.cpp \
+    cdatabasemanager.cpp
 
 HEADERS  += cmainwindow.h \
-    cdownloader.h
+    cdownloader.h \
+    cdatabasemanager.h
 
 FORMS    += cmainwindow.ui
 
