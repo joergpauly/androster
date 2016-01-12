@@ -73,9 +73,39 @@ bool CDownloader::checkDb()
     return lFile.open(QIODevice::ReadOnly);
 }
 
+void CDownloader::dlFinished(QNetworkReply *pReply)
+{
+    switch(m_retrieveMode)
+    {
+        case Retrieve::timeStamp:
+        {
+            // Altes Timestamp sichern
+            m_TsFile->rename(TSFILE, "dbts.old");
+            m_TsFile->close();
+            // Neues Timestamp holen
+            m_TsFile = new QFile(qApp->applicationDirPath() + "/" + TSFILE);
+            m_TsFile->open(QIODevice::WriteOnly);
+            m_TsFile->write(pReply->readAll());
+            m_TsFile->close();
+        }
+        case Retrieve::dataBase:
+        {
+            m_DbFile->open(QIODevice::WriteOnly);
+            m_DbFile->write(pReply->readAll());
+            m_DbFile->close();
+        }
+    }
+}
+
 bool CDownloader::getTimeStamp()
 {
+   m_retrieveMode = Retrieve::timeStamp;
    QUrl lUrl(QString(FTPURL) + QString(TSFILE));
+   lUrl.setUserName(USERNAME);
+   lUrl.setPassword(PASSWD);
+   m_Request = new QNetworkRequest(lUrl);
+   m_Reply = m_netMan->get(*m_Request);
+   connect(m_netMan, SIGNAL(finished(QNetworkReply*)), SLOT(dlFinished(QNetworkReply*)));
 }
 
 bool CDownloader::getDataBase()

@@ -53,11 +53,12 @@ class CDownloader : public QObject
     Q_OBJECT
 
 private:
-    QObject*            m_parent;
-    QFile*              m_TsFile;
-    QFile*              m_DbFile;
-    QNetworkRequest*    m_Request;
-    QNetworkReply*      m_Reply;
+    QObject*                m_parent;
+    QFile*                  m_TsFile;
+    QFile*                  m_DbFile;
+    QNetworkRequest*        m_Request;
+    QNetworkReply*          m_Reply;
+    QNetworkAccessManager*  m_netMan;
 
     enum Retrieve
     {
@@ -68,6 +69,7 @@ private:
     bool getTimeStamp();
     bool getDataBase();
     void checkForUpdate();
+    int  m_retrieveMode;
 
 public:
     explicit CDownloader(QObject *parent = 0);
@@ -79,6 +81,7 @@ public:
 signals:
 
 public slots:
+    void dlFinished(QNetworkReply* pReply);
 };
 
 #endif // CDOWNLOADER_H
