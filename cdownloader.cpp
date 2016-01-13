@@ -77,7 +77,7 @@ void CDownloader::dlFinished(QNetworkReply *pReply)
 {
     switch(m_retrieveMode)
     {
-        case Retrieve::timeStamp:
+        case timeStamp:
         {
             // Altes Timestamp sichern
             m_TsFile->rename(TSFILE, "dbts.old");
@@ -88,7 +88,7 @@ void CDownloader::dlFinished(QNetworkReply *pReply)
             m_TsFile->write(pReply->readAll());
             m_TsFile->close();
         }
-        case Retrieve::dataBase:
+        case dataBase:
         {
             m_DbFile->open(QIODevice::WriteOnly);
             m_DbFile->write(pReply->readAll());
@@ -99,12 +99,13 @@ void CDownloader::dlFinished(QNetworkReply *pReply)
 
 bool CDownloader::getTimeStamp()
 {
-   m_retrieveMode = Retrieve::timeStamp;
+   m_retrieveMode = timeStamp;
    QUrl lUrl(QString(FTPURL) + QString(TSFILE));
    lUrl.setUserName(USERNAME);
    lUrl.setPassword(PASSWD);
-   m_Request = new QNetworkRequest(lUrl);
-   m_Reply = m_netMan->get(*m_Request);
+   lUrl.setPort(21);
+   QNetworkRequest lReq(lUrl);
+   m_Reply = m_netMan->get(lReq);
    connect(m_netMan, SIGNAL(finished(QNetworkReply*)), SLOT(dlFinished(QNetworkReply*)));
 }
 
