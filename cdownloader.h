@@ -69,8 +69,8 @@ private:
         dataBase
     };
 
-    bool getTimeStamp();
-    bool getDataBase();
+    void getTimeStamp();
+    void getDataBase();
     void checkForUpdate();
     int  m_retrieveMode;
 

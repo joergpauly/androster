@@ -43,6 +43,11 @@ CDownloader::~CDownloader()
     {
         m_TsFile->deleteLater();
     }
+
+    if(m_ToFile)
+    {
+        m_ToFile->deleteLater();
+    }
 }
 
 void CDownloader::doDownload(bool pSetup = false)
@@ -102,9 +107,10 @@ void CDownloader::dlFinished()
             break;
         }
     }
+    //disconnect(m_Reply, SIGNAL(finished()), this, SLOT(dlFinished()));
 }
 
-bool CDownloader::getTimeStamp()
+void CDownloader::getTimeStamp()
 {
     m_netMan = new QNetworkAccessManager(this);
     m_retrieveMode = timeStamp;
@@ -116,9 +122,16 @@ bool CDownloader::getTimeStamp()
     connect(m_Reply, SIGNAL(finished()), this, SLOT(dlFinished()));
 }
 
-bool CDownloader::getDataBase()
+void CDownloader::getDataBase()
 {
-
+    m_netMan = new QNetworkAccessManager(this);
+    m_retrieveMode = dataBase;
+    QUrl lUrl(QString(FTPURL) + QString(DBFILE));
+    lUrl.setUserName(USERNAME);
+    lUrl.setPassword(PASSWD);
+    m_Request = new QNetworkRequest(lUrl);
+    m_Reply = m_netMan->get(*m_Request);
+    connect(m_Reply, SIGNAL(finished()), this, SLOT(dlFinished()));
 }
 
 void CDownloader::checkForUpdate()
