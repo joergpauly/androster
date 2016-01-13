@@ -52,6 +52,7 @@ CDownloader::~CDownloader()
 
 void CDownloader::doDownload(bool pSetup = false)
 {
+    // TODO: Datenbank schließen!!!
     m_Setup = pSetup;
     m_DbFile = new QFile(qApp->applicationDirPath() + "/" + DBFILE);
     m_TsFile = new QFile(qApp->applicationDirPath() + "/" + TSFILE);
