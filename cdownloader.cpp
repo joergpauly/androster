@@ -47,21 +47,13 @@ CDownloader::~CDownloader()
 
 void CDownloader::doDownload(bool pSetup = false)
 {
+    m_Setup = pSetup;
     m_DbFile = new QFile(qApp->applicationDirPath() + "/" + DBFILE);
     m_TsFile = new QFile(qApp->applicationDirPath() + "/" + TSFILE);
+    m_ToFile = new QFile(qApp->applicationDirPath() + "/" + TOFILE);
 
     // Zunächst Timestamp holen
     getTimeStamp();
-
-    // Bei Setup sofort Db holen, ansonsten Timestamp vergleichen
-    if(pSetup)
-    {
-        getDataBase();
-    }
-    else
-    {
-        checkForUpdate();
-    }
 }
 
 bool CDownloader::checkDb()
@@ -73,40 +65,55 @@ bool CDownloader::checkDb()
     return lFile.open(QIODevice::ReadOnly);
 }
 
-void CDownloader::dlFinished(QNetworkReply *pReply)
+void CDownloader::dlFinished()
 {
     switch(m_retrieveMode)
     {
         case timeStamp:
         {
             // Altes Timestamp sichern
-            m_TsFile->rename(TSFILE, "dbts.old");
+            m_TsFile->open(QIODevice::ReadOnly);
+            m_ToFile->open(QIODevice::WriteOnly);
+            m_ToFile->write(m_TsFile->readAll());
+            m_ToFile->close();
             m_TsFile->close();
             // Neues Timestamp holen
             m_TsFile = new QFile(qApp->applicationDirPath() + "/" + TSFILE);
             m_TsFile->open(QIODevice::WriteOnly);
-            m_TsFile->write(pReply->readAll());
+            m_TsFile->write(m_Reply->readAll());
             m_TsFile->close();
+            // Bei Setup sofort Db holen, ansonsten Timestamp vergleichen
+            if(m_Setup)
+            {
+                m_Setup = false;
+                getDataBase();
+            }
+            else
+            {
+                checkForUpdate();
+            }
+            break;
         }
         case dataBase:
         {
             m_DbFile->open(QIODevice::WriteOnly);
-            m_DbFile->write(pReply->readAll());
+            m_DbFile->write(m_Reply->readAll());
             m_DbFile->close();
+            break;
         }
     }
 }
 
 bool CDownloader::getTimeStamp()
 {
-   m_retrieveMode = timeStamp;
-   QUrl lUrl(QString(FTPURL) + QString(TSFILE));
-   lUrl.setUserName(USERNAME);
-   lUrl.setPassword(PASSWD);
-   lUrl.setPort(21);
-   QNetworkRequest lReq(lUrl);
-   m_Reply = m_netMan->get(lReq);
-   connect(m_netMan, SIGNAL(finished(QNetworkReply*)), SLOT(dlFinished(QNetworkReply*)));
+    m_netMan = new QNetworkAccessManager(this);
+    m_retrieveMode = timeStamp;
+    QUrl lUrl(QString(FTPURL) + QString(TSFILE));
+    lUrl.setUserName(USERNAME);
+    lUrl.setPassword(PASSWD);
+    m_Request = new QNetworkRequest(lUrl);
+    m_Reply = m_netMan->get(*m_Request);
+    connect(m_Reply, SIGNAL(finished()), this, SLOT(dlFinished()));
 }
 
 bool CDownloader::getDataBase()
@@ -116,5 +123,12 @@ bool CDownloader::getDataBase()
 
 void CDownloader::checkForUpdate()
 {
-
+    m_ToFile->open(QIODevice::ReadOnly);
+    double lOld = m_ToFile->readAll().toDouble();
+    m_TsFile->open(QIODevice::ReadOnly);
+    double lNew = m_TsFile->readAll().toDouble();
+    if(lOld < lNew)
+    {
+        getDataBase();
+    }
 }
