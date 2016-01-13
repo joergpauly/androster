@@ -46,6 +46,7 @@
 #define PASSWD   "P3rsephone"
 #define DBFILE   "mr.sqlite"
 #define TSFILE   "dbts.ver"
+#define TOFILE   "dbts.old"
 
 
 class CDownloader : public QObject
@@ -55,10 +56,12 @@ class CDownloader : public QObject
 private:
     QObject*                m_parent;
     QFile*                  m_TsFile;
+    QFile*                  m_ToFile;
     QFile*                  m_DbFile;
     QNetworkRequest*        m_Request;
     QNetworkReply*          m_Reply;
     QNetworkAccessManager*  m_netMan;
+    bool                    m_Setup;
 
     enum Retrieve
     {
@@ -81,7 +84,7 @@ public:
 signals:
 
 public slots:
-    void dlFinished(QNetworkReply* pReply);
+    void dlFinished();
 };
 
 #endif // CDOWNLOADER_H
