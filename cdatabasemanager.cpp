@@ -55,5 +55,5 @@ void CDatabaseManager::closeDb()
 
 CPersonalList *CDatabaseManager::personalList(QDate pDate)
 {
-
+    // TODO: Personalliste aus DB erstellen
 }
