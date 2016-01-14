@@ -28,13 +28,40 @@
 #ifndef CDATABASEMANAGER_H
 #define CDATABASEMANAGER_H
 
+// System-Header
+#include <QApplication>
 #include <QObject>
+#include <QSql>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QString>
+#include <QVariant>
+
+// Projekt-Header
+#include "cduty.h"
+#include "cdutytype.h"
+#include "cpersonal.h"
+
+// Definitionen
+#define DBFILE   "mr.sqlite"
 
 class CDatabaseManager : public QObject
 {
     Q_OBJECT
+
+private:
+    QSqlDatabase    m_db;
+    QObject*        m_parent;
+
 public:
+    // Konstruktor / Destruktor
     explicit CDatabaseManager(QObject *parent = 0);
+    ~CDatabaseManager();
+
+    // Public Member
+    bool openDb();
+    void closeDb();
 
 signals:
 

@@ -1,10 +1,10 @@
 /********************************************************************
 *
-*   File: cdatabasemanager.cpp    Class: CDatabaseManager
+*   File: cpersonallist.h    Class: CPersonalList
 *
 *   This file is part of the MEGA-Series Project.
 *   Copyright (C) 2016 Joerg Pauly
-*   Created 11.01.2016 by joerg on PSYS41.PSYS
+*   Created 14.01.2016 by joerg on psys41.psys
 *   All Rights reserved
 *
 *   Alle Programme der MEGA-Serie sind Freie Software:
@@ -25,30 +25,14 @@
 *   Wenn nicht, siehe <http://www.gnu.org/licenses/>.
 *
 ********************************************************************/
-#include "cdatabasemanager.h"
+#ifndef CPERSONALLIST_H
+#define CPERSONALLIST_H
 
-CDatabaseManager::CDatabaseManager(QObject *parent) : QObject(parent)
-{
-    m_parent = parent;
-    QString lFile = qApp->applicationDirPath() + "/" + DBFILE;
-    m_db = QSqlDatabase::addDatabase("QSQLITE");
-    m_db.setDatabaseName(lFile);
-}
 
-CDatabaseManager::~CDatabaseManager()
+class CPersonalList : public QList<CPersonal>
 {
-    closeDb();
-}
+public:
+    CPersonalList();
+};
 
-bool CDatabaseManager::openDb()
-{
-    return m_db.open();
-}
-
-void CDatabaseManager::closeDb()
-{
-    if(m_db.isOpen())
-    {
-        m_db.close();
-    }
-}
+#endif // CPERSONALLIST_H

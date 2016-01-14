@@ -18,14 +18,16 @@ SOURCES += main.cpp\
     cdatabasemanager.cpp \
     cpersonal.cpp \
     cdutytype.cpp \
-    cduty.cpp
+    cduty.cpp \
+    cpersonallist.cpp
 
 HEADERS  += cmainwindow.h \
     cdownloader.h \
     cdatabasemanager.h \
     cpersonal.h \
     cdutytype.h \
-    cduty.h
+    cduty.h \
+    cpersonallist.h
 
 FORMS    += cmainwindow.ui
 
