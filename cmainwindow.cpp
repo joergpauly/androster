@@ -28,6 +28,7 @@
 #include "cmainwindow.h"
 #include "ui_cmainwindow.h"
 
+
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CMainWindow)
@@ -47,6 +48,16 @@ CMainWindow::~CMainWindow()
     delete ui;
     m_Db->deleteLater();
     m_Dl->deleteLater();
+}
+
+CDatabaseManager *CMainWindow::Db() const
+{
+    return m_Db;
+}
+
+void CMainWindow::setDb(CDatabaseManager *Db)
+{
+    m_Db = Db;
 }
 
 void CMainWindow::on_actionAktualisieren_triggered()

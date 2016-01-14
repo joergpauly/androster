@@ -53,6 +53,9 @@ public:
     explicit CMainWindow(QWidget *parent = 0);
     ~CMainWindow();
 
+    CDatabaseManager *Db() const;
+    void setDb(CDatabaseManager *Db);
+
 private slots:
     void on_actionAktualisieren_triggered();
 

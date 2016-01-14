@@ -26,6 +26,7 @@
 *
 ********************************************************************/
 #include "cdownloader.h"
+#include "cmainwindow.h"
 
 CDownloader::CDownloader(QObject *parent) : QObject(parent)
 {
@@ -52,7 +53,8 @@ CDownloader::~CDownloader()
 
 void CDownloader::doDownload(bool pSetup = false)
 {
-    // TODO: Datenbank schließen!!!
+    // Datenbank schließen!!!
+    ((CMainWindow*)m_parent)->Db()->closeDb();
     m_Setup = pSetup;
     m_DbFile = new QFile(qApp->applicationDirPath() + "/" + DBFILE);
     m_TsFile = new QFile(qApp->applicationDirPath() + "/" + TSFILE);
@@ -105,6 +107,8 @@ void CDownloader::dlFinished()
             m_DbFile->open(QIODevice::WriteOnly);
             m_DbFile->write(m_Reply->readAll());
             m_DbFile->close();
+            // Datenbank wieder öffnen
+            ((CMainWindow*)m_parent)->Db()->openDb();
             break;
         }
     }
