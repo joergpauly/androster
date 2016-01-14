@@ -52,3 +52,8 @@ void CDatabaseManager::closeDb()
         m_db.close();
     }
 }
+
+CPersonalList *CDatabaseManager::personalList(QDate pDate)
+{
+
+}

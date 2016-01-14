@@ -28,6 +28,13 @@
 #ifndef CPERSONALLIST_H
 #define CPERSONALLIST_H
 
+// System-Header
+#include <QList>
+#include <QString>
+#include <QVariant>
+
+// Projekt-Header
+#include "cpersonal.h"
 
 class CPersonalList : public QList<CPersonal>
 {

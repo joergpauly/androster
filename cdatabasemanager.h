@@ -37,11 +37,15 @@
 #include <QSqlRecord>
 #include <QString>
 #include <QVariant>
+#include <QDate>
+#include <QDateTime>
+#include <QTime>
 
 // Projekt-Header
 #include "cduty.h"
 #include "cdutytype.h"
 #include "cpersonal.h"
+#include "cpersonallist.h"
 
 // Definitionen
 #define DBFILE   "mr.sqlite"
@@ -53,6 +57,7 @@ class CDatabaseManager : public QObject
 private:
     QSqlDatabase    m_db;
     QObject*        m_parent;
+    CPersonalList*  m_pList;
 
 public:
     // Konstruktor / Destruktor
@@ -62,6 +67,7 @@ public:
     // Public Member
     bool openDb();
     void closeDb();
+    CPersonalList* personalList(QDate pDate);
 
 signals:
 
