@@ -30,8 +30,6 @@
 #include <QSqlRecord>
 #include <QVariant>
 
-#include "cdtybasetype.h"
-
 class CDutyType
 {
 public:
@@ -84,8 +82,7 @@ public:
     bool Checked() const;
     void setChecked(bool Checked);
 
-    CDtyBaseType BaseType() const;
-    void setBaseType(CDtyBaseType BaseType);
+    int Sequence() const;
 
 private:
     int             m_id;
@@ -102,8 +99,8 @@ private:
     int             m_RosterColorR;
     int             m_RosterColorG;
     int             m_RosterColorB;
+    int             m_Sequence;
     bool            m_Checked;
-    CDtyBaseType    m_BaseType;
 
     void readDB(QSqlQuery* pqry);
 };
