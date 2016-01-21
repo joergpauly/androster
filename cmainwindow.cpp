@@ -55,14 +55,15 @@ CDatabaseManager *CMainWindow::Db() const
     return m_Db;
 }
 
-void CMainWindow::setDb(CDatabaseManager *Db)
-{
-    m_Db = Db;
-}
-
 void CMainWindow::on_actionAktualisieren_triggered()
 {
     m_Dl->doDownload(false);
 }
 
 
+
+void CMainWindow::on_actionDB_Test_triggered()
+{
+    CPersonalList* lList = m_Db->personalList(QDate::currentDate());
+    int i = lList->count();
+}

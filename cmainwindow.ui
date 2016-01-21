@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>437</width>
-     <height>21</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuEinstellungen">
@@ -31,6 +31,8 @@
     <addaction name="actionTag"/>
     <addaction name="actionWoche"/>
     <addaction name="actionMonat"/>
+    <addaction name="separator"/>
+    <addaction name="actionDB_Test"/>
    </widget>
    <addaction name="menuEinstellungen"/>
   </widget>
@@ -52,6 +54,11 @@
   <action name="actionMonat">
    <property name="text">
     <string>Monat</string>
+   </property>
+  </action>
+  <action name="actionDB_Test">
+   <property name="text">
+    <string>DB-Test</string>
    </property>
   </action>
  </widget>

@@ -33,6 +33,7 @@ CDatabaseManager::CDatabaseManager(QObject *parent) : QObject(parent)
     QString lFile = qApp->applicationDirPath() + "/" + DBFILE;
     m_db = QSqlDatabase::addDatabase("QSQLITE");
     m_db.setDatabaseName(lFile);
+    m_db.open();
 }
 
 CDatabaseManager::~CDatabaseManager()
@@ -55,5 +56,24 @@ void CDatabaseManager::closeDb()
 
 CPersonalList *CDatabaseManager::personalList(QDate pDate)
 {
-    // TODO: Personalliste aus DB erstellen
+    // Personalliste aus DB erstellen
+    QDate lFromDate;
+    lFromDate.setDate(pDate.year(), pDate.month(), 1);
+    QDate lToDate;
+    lToDate.setDate(pDate.year(), pDate.month(), pDate.daysInMonth());
+    QSqlQuery* lqry = new QSqlQuery();
+    lqry->prepare("SELECT * FROM tblPersonal WHERE Eintritt < :TO AND Austritt > :FROM ORDER BY Name;");
+    lqry->bindValue(":TO", lToDate.toString("yyyy-MM-dd"));
+    lqry->bindValue(":FROM",lFromDate.toString("yyyy-MM-dd"));
+    lqry->exec();
+    lqry->first();
+    CPersonalList* lList = new CPersonalList();
+
+    while(lqry->isValid())
+    {
+        CPersonal lPs(lqry->value(lqry->record().indexOf("ID")).toInt());
+        lList->append(lPs);
+        lqry->next();
+    }
+    return lList;
 }
