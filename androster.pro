@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     cpersonal.cpp \
     cdutytype.cpp \
     cduty.cpp \
-    cpersonallist.cpp
+    cpersonallist.cpp \
+    cpersonchoice.cpp
 
 HEADERS  += cmainwindow.h \
     cdownloader.h \
@@ -27,9 +28,11 @@ HEADERS  += cmainwindow.h \
     cpersonal.h \
     cdutytype.h \
     cduty.h \
-    cpersonallist.h
+    cpersonallist.h \
+    cpersonchoice.h
 
-FORMS    += cmainwindow.ui
+FORMS    += cmainwindow.ui \
+    cpersonchoice.ui
 
 CONFIG += mobility
 MOBILITY = 
