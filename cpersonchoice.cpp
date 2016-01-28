@@ -27,12 +27,20 @@
 ********************************************************************/
 #include "cpersonchoice.h"
 #include "ui_cpersonchoice.h"
+#include "cmainwindow.h"
+
 
 CPersonChoice::CPersonChoice(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CPersonChoice)
 {
     ui->setupUi(this);
+    CPersonalList* lPersList = ((CMainWindow*)m_parent)->PersList();
+
+    for(int i = 0; i < lPersList->count(); i++)
+    {
+        ui->cmbPersonal->addItem(QString(lPersList->at(i).Name() + ", " + lPersList->at(i).VName()), QVariant(lPersList->at(i).id()));
+    }
 }
 
 CPersonChoice::~CPersonChoice()
@@ -42,5 +50,10 @@ CPersonChoice::~CPersonChoice()
 
 void CPersonChoice::on_cmbPersonal_currentIndexChanged(int index)
 {
+    m_PersID = ui->cmbPersonal->itemData(index, Qt::UserRole).toInt();
+}
 
+int CPersonChoice::PersID() const
+{
+    return m_PersID;
 }

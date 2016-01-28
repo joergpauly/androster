@@ -36,6 +36,9 @@
 // Projekt-Header
 #include "cdownloader.h"
 #include "cdatabasemanager.h"
+#include "cpersonallist.h"
+#include "cpersonchoice.h"
+#include "cpersonal.h"
 
 namespace Ui {
 class CMainWindow;
@@ -48,18 +51,19 @@ class CMainWindow : public QMainWindow
 private:
     CDownloader*        m_Dl;
     CDatabaseManager*   m_Db;
+    CPersonalList*      m_PersList;
+    CPersonal*          m_ActUser;
 
 public:
     explicit CMainWindow(QWidget *parent = 0);
     ~CMainWindow();
 
     CDatabaseManager *Db() const;    
+    CPersonalList *PersList() const;
 
 private slots:
     void on_actionAktualisieren_triggered();
-
     void on_actionDB_Test_triggered();
-
     void on_actionDienstplan_f_r_triggered();
 
 private:

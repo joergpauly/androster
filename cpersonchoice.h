@@ -42,11 +42,15 @@ public:
     explicit CPersonChoice(QWidget *parent = 0);
     ~CPersonChoice();
 
+    int PersID() const;
+
 private slots:
     void on_cmbPersonal_currentIndexChanged(int index);
 
 private:
     Ui::CPersonChoice *ui;
+    int m_PersID;
+    QWidget* m_parent;
 };
 
 #endif // CPERSONCHOICE_H

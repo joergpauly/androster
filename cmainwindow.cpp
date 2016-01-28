@@ -28,13 +28,11 @@
 #include "cmainwindow.h"
 #include "ui_cmainwindow.h"
 
-
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CMainWindow)
 {
     ui->setupUi(this);
-    m_Db = new CDatabaseManager(this);
     m_Dl = new CDownloader(this);
 
     // Nachsehen, ob eine DB-Datei vorhanden ist und
@@ -43,6 +41,12 @@ CMainWindow::CMainWindow(QWidget *parent) :
     {
         m_Dl->doDownload(true);
     }
+
+    // Datenbank initialisieren
+    m_Db = new CDatabaseManager(this);
+
+    // Personalliste laden
+    m_PersList = m_Db->personalList(QDate::currentDate());
 }
 
 CMainWindow::~CMainWindow()
@@ -62,8 +66,6 @@ void CMainWindow::on_actionAktualisieren_triggered()
     m_Dl->doDownload(false);
 }
 
-
-
 void CMainWindow::on_actionDB_Test_triggered()
 {
     CPersonalList* lList = m_Db->personalList(QDate::currentDate());
@@ -72,5 +74,15 @@ void CMainWindow::on_actionDB_Test_triggered()
 
 void CMainWindow::on_actionDienstplan_f_r_triggered()
 {
+    CPersonChoice lDlg;
 
+    if(lDlg.exec() == QDialog::Accepted)
+    {
+        m_ActUser = new CPersonal(lDlg.PersID());
+    }
+}
+
+CPersonalList *CMainWindow::PersList() const
+{
+    return m_PersList;
 }
