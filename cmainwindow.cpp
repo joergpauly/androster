@@ -80,6 +80,7 @@ void CMainWindow::on_actionDienstplan_f_r_triggered()
     {
         m_ActUser = new CPersonal(lDlg.PersID());
     }
+    lDlg.close();
 }
 
 CPersonalList *CMainWindow::PersList() const

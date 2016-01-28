@@ -57,3 +57,4 @@ int CPersonChoice::PersID() const
 {
     return m_PersID;
 }
+
