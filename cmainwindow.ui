@@ -33,6 +33,7 @@
     <addaction name="actionMonat"/>
     <addaction name="separator"/>
     <addaction name="actionDB_Test"/>
+    <addaction name="actionDienstplan_f_r"/>
    </widget>
    <addaction name="menuEinstellungen"/>
   </widget>
@@ -59,6 +60,11 @@
   <action name="actionDB_Test">
    <property name="text">
     <string>DB-Test</string>
+   </property>
+  </action>
+  <action name="actionDienstplan_f_r">
+   <property name="text">
+    <string>Dienstplan für...</string>
    </property>
   </action>
  </widget>

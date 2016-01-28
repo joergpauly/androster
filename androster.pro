@@ -29,7 +29,8 @@ HEADERS  += cmainwindow.h \
     cduty.h \
     cpersonallist.h
 
-FORMS    += cmainwindow.ui
+FORMS    += cmainwindow.ui \
+    cperschoice.ui
 
 CONFIG += mobility
 MOBILITY = 

@@ -37,6 +37,8 @@ CMainWindow::CMainWindow(QWidget *parent) :
     m_Db = new CDatabaseManager(this);
     m_Dl = new CDownloader(this);
 
+    // Nachsehen, ob eine DB-Datei vorhanden ist und
+    // falls nicht, downloaden.
     if(!m_Dl->checkDb())
     {
         m_Dl->doDownload(true);
@@ -66,4 +68,9 @@ void CMainWindow::on_actionDB_Test_triggered()
 {
     CPersonalList* lList = m_Db->personalList(QDate::currentDate());
     int i = lList->count();
+}
+
+void CMainWindow::on_actionDienstplan_f_r_triggered()
+{
+
 }

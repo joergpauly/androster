@@ -60,6 +60,8 @@ private slots:
 
     void on_actionDB_Test_triggered();
 
+    void on_actionDienstplan_f_r_triggered();
+
 private:
     Ui::CMainWindow *ui;
 
